@@ -1,5 +1,12 @@
 # ts-rest with Fastify API + React/Vite UI
 
+⚡⚡
+THIS BRANCH HAS BEEN MIGRATED TO ITS OWN REPO AT https://github.com/firxworx/ts-rest-workspace
+ALL NEW UPDATES WILL BE DONE THERE
+
+This branch started from main and officially removes NX + adds full CRUD functionality + shadcn/ui and splits the workpaces into shared packages.
+⚡⚡
+
 This pnpm workspace (monorepo) features a working full-stack application created using [ts-rest](https://ts-rest.com/) backed up by [zod](https://zod.dev/) and [@tanstack/react-query](https://tanstack.com/query/latest) for type-safe client-server communication with an RPC-like interface.
 
 - React + Vite front-end with react-router + react-query + tailwindcss + shadcn/ui
@@ -7,7 +14,7 @@ This pnpm workspace (monorepo) features a working full-stack application created
 
 This project is ready to serve as a project boilerplate for new projects to get started quickly.
 
-## Benefits
+## 🔥 Benefits
 
 ts-rest offers comparable benefits to [TRPC](https://trpc.io/) in terms of developer efficiency and developer experience except it uses JSON/REST under the hood instead of a custom stack-specific protocol that's exclusive to TRPC and the TypeScript ecosystem.
 
@@ -23,9 +30,9 @@ This monorepo is flexible and supports swapping out the back-end or front-end st
 
 Unlike so many "starters" the setup is fast and `pnpm dev` + `pnpm test` + `pnpm build` actually work!
 
-## Architecture
+## 📐 Architecture
 
-🧭 This workspace includes
+### Workspace layout 🧭🗺️
 
 - `packages/common` - shared code and utilities for use by both UI + API
 - `packages/contracts` - ts-rest [contract definitions](https://ts-rest.com/docs/core/) implemented by UI + API
@@ -37,7 +44,7 @@ Unlike so many "starters" the setup is fast and `pnpm dev` + `pnpm test` + `pnpm
 - `apps/ui` - React + Vite SPA using ts-rest's react-query client to call the API
 - `apps/fastify-api` - Fastify API server using ts-rest to implement the back-end of the contract
 
-🍬 Assorted goodies include
+### Assorted goodies include 🍬🍬
 
 - fastify api build with `esbuild` with the dev server running using `tsx watch` for fast iteration
 - working `vitest` configuration in all packages including `@testing-library/react` for testing React components
@@ -48,11 +55,13 @@ Unlike so many "starters" the setup is fast and `pnpm dev` + `pnpm test` + `pnpm
 - each app and package has its own `README.md` with additional information and setup instructions
 - comprehensive documentation and comments that don't assume you already know everything about this complex ecosystem
 
-## Get Started 🚀
+## 🚀 Get Started
+
+### 🛠️ Installation
 
 Copy the local `.env.sample` and create `.env` in both `apps/fastify-api` and `apps/ui`.
 
-You can run the following bash script to do this for you if you're feeling lazy:
+If you're feeling lazy the following bash script will do it for you:
 
 ```sh
 bash ./scripts/setup.sh
@@ -67,9 +76,9 @@ Install dependencies:
 pnpm install
 ```
 
-### Development Workflow 🦾
+### 🦾 Development 
 
-Start the development servers of the UI and API:
+Start the dev server for the UI and API:
 
 ```sh
 pnpm dev
@@ -82,7 +91,7 @@ A proxy configuration in `apps/ui/vite.config.ts` proxies requests to http://loc
 > [!TIP]
 > If you experience ipv4 vs. ipv6 issues on MacOS or Windows you may need to revise `vite.config.ts` and potentially other config files to use `127.0.0.1` instead of `localhost`.
 
-### Running Tests 🧪
+### 🧪 Testing 
 
 Run all tests in the workspace using `vitest`:
 
@@ -92,7 +101,7 @@ pnpm test
 
 All `vitest` configurations work. There are a handful of example tests sprinkled throughout the workspace to help you get started.
 
-### Build
+### 🏗️ Build
 
 Build the apps:
 
@@ -104,9 +113,9 @@ Once built you can run the API server on its own: `node apps/fastify-api/dist/ma
 
 Refer to the `README.md` files of each app for important information about the builds.
 
-### Running Commands
+### 💻 Commands
 
-In pnpm workspaces use the `-r` (recursive) option to run any command against all packages in the workspace. Any project with the target command in its `package.json` will run it. Add the `--stream` option to interleave the output of all the commands.
+When using `pnpm` in a workspace use the `-r` (recursive) option to a command against all packages in the workspace. Any project with the target command in its `package.json` will run it. Add the `--stream` option to interleave the output of all the commands.
 
 For example to run type-check:
 
@@ -134,7 +143,7 @@ The following example adds a dev dependency (`-D`) to the workspace:
 pnpm add -wD eslint
 ```
 
-### Managing Dependencies
+### 🔗 Managing Dependencies
 
 All of the packages in this workspace are configured as internal packages that directly export `*.ts` or `*.tsx` files without a build/bundle step. This defers the responsibility of compiling and bundling to the build step of any apps that import them.
 
@@ -150,7 +159,7 @@ Refer to the `package.json` files of the apps and packages in the workspace to u
 
 Docs: https://pnpm.io/workspaces#workspace-protocol-workspace
 
-## Extending this Boilerplate
+## ✨ Extending this Boilerplate
 
 The mock blog in this repo is a fully functional CRUD example. It is kept simple and a fresh set of random posts are generated in-memory every time you (re)start the dev server using data from [faker-js](https://fakerjs.dev/).
 
@@ -168,23 +177,31 @@ On the client-side ts-rest officially supports [Vue Query](https://ts-rest.com/d
 
 Refer to the [ts-rest docs ](https://ts-rest.com/docs/intro) for more.
 
-## Maintaining the Monorepo
+## 🫧 Maintaining the Monorepo
+
+### 🕊️ Syncpack
 
 Run `pnpm syncpack list-mismatches` to identify dependency mismatches in the workspace.
 
-If the suggested auto-fixes look safe you can then run `pnpm syncpack fix-mismatches` to sync all package versions.
+If the suggested fixes look safe run `pnpm syncpack fix-mismatches` to sync all package versions.
 
 ```sh
 pnpm syncpack list-mismatches
 pnpm syncpack fix-mismatches
 ```
 
-Run `pnpm dedupe --check` (a safe operation) from time-to-time to maintain the lockfile and ensure optimized bundle sizes. If the proposed changes look safe run `pnpm dedupe` to apply them.
+### 🦅 Dedupe
+
+Run `pnpm dedupe --check` (a safe operation) from time-to-time to maintain the lockfile and ensure optimized bundle sizes. 
+
+If the proposed changes look safe run `pnpm dedupe` to apply them.
 
 ```sh
 pnpm dedupe --check
 pnpm dedupe
 ```
+
+### ⚙️ Updates
 
 Use `pnpm -r up -i` to update all the packages in the workspace using the interactive installer.
 Add the `--latest` option to bump all packages to their latest release versions including those with possibly breaking changes.
@@ -193,9 +210,11 @@ Add the `--latest` option to bump all packages to their latest release versions 
 # bump dependencies
 pnpm -r up -i
 
-# latest dependencies
+# update to latest release versions
 pnpm -r up -i --latest
 ```
+
+### 🪠 Troubleshooting
 
 In the rare case you experience a lockfile issue run `pnpm install --force` to rebuild the lockfile.
 
